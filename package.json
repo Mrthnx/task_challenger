@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "version": "1.0.0",
   "scripts": {
     "clean": "npx rimraf dist",
     "build": "npm run clean && npm run compile",
