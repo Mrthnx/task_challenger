@@ -1,0 +1,32 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.IP_REMOTE }} >> ~/.ssh/known_hosts
+        env:
+          SERVER_IP: ${{ secrets.IP_REMOTE }}
+
+      - name: Deploy over SSH
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
+            cd /home/ubuntu/apps/task_challenger
+            git pull origin master
+            docker build -t backend_reto .
+            docker ps -a -q --filter ancestor=backend_reto | head -n 10 | xargs docker rm -f
+            docker run -dit -p 3000:3000 backend_reto
+          EOF
