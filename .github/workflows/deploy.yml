@@ -19,11 +19,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.IP_REMOTE }} >> ~/.ssh/known_hosts
         env:
-          SERVER_IP: ${{ secrets.IP_REMOTE }}
+          IP_REMOTE: ${{ secrets.IP_REMOTE }}
 
       - name: Deploy over SSH
         run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
+          ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.IP_REMOTE }} << 'EOF'
             cd /home/ubuntu/apps/task_challenger
             git pull origin master
             docker build -t backend_reto .
