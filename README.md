@@ -67,3 +67,7 @@ curl -X GET http://localhost:3000/health
 ## Example APIs
 
 Refer to the `api.http` file for example API requests.
+
+## Deployment
+
+All pushes to the `master` branch will be automatically deployed to an EC2 instance on AWS using GitHub Actions for continuous integration and deployment.
