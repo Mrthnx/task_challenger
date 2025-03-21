@@ -1,17 +1,69 @@
-# backend
+# Task Challenger
 
-Use node v23.7.0
+## Node JS v23.7.0
 
-To install dependencies:
+## Setting Up
 
-```bash
-bun install
+1. Create a file named `.env` in the root directory with the following content:
+
+```
+NODE_ENV=dev
+APP_PORT=
+JWT_SECRET=
+
+DATABASE_TYPE=postgres
+DATABASE_HOST=
+DATABASE_PORT=5432
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+DATABASE_MAX_POOL_SIZE=10
+DATABASE_LOGGING=true
 ```
 
-To run:
+**Note:** All environment variables are required.
 
-```bash
-bun run index.ts
+## Running with Docker
+
+1. Install Docker if you haven't already.
+
+2. Build the Docker image:
+
+```
+docker build -t taskchallenger .
 ```
 
-This project was created using `bun init` in bun v1.1.12. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+3. Run the Docker container:
+
+```
+docker run -d -p 3000:3000 taskchallenger
+```
+
+## Running with Node JS
+
+1. Install the necessary packages:
+
+```
+npm install
+```
+
+2. Start the application:
+
+- For development: `npm run dev`
+- For production: `npm run start`
+
+## Database
+
+When the application starts, it will create the database and tables automatically. Ensure to create the database with the names specified in the environment variables.
+
+## Health Check
+
+To verify that the application is running, you can perform a health check using the following command:
+
+```
+curl -X GET http://localhost:3000/health
+```
+
+## Example APIs
+
+Refer to the `api.http` file for example API requests.
