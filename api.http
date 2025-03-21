@@ -1,0 +1,63 @@
+###
+
+# GET login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "mrthnx@icloud.com"
+}
+
+###
+
+# GET register
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "email": "mrthnx1@icloud.com"
+}
+
+###
+
+# GET tasks
+GET http://localhost:3000/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNTEyMCwiZXhwIjoxNzQyNTI4NzIwfQ.Z_vAfgd9mFmB80s2ra0p3T7oFAcg6GJwKBshGBl9CH0
+
+
+###
+
+# GET tasks
+GET http://localhost:3000/tasks/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBnbWFpbC5jb20iLCJpYXQiOjE3NDI1MjM3NjAsImV4cCI6MTc0MjUyNzM2MH0.U9dN8yTB3bvl3T90azIAfyAlaR-YjLQZUa_bBSSaHQw
+
+###
+
+# POST tasks
+POST http://localhost:3000/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNDcwNywiZXhwIjoxNzQyNTI4MzA3fQ.XRnJMFe6nW6tkyP-Il_FgHcXf2qN61Zwhq4tjLiBGQs
+Content-Type: application/json
+
+{
+    "title": "test",
+    "description": "test"
+}
+
+###
+
+# PUT tasks
+PUT http://localhost:3000/tasks/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNTEyMCwiZXhwIjoxNzQyNTI4NzIwfQ.Z_vAfgd9mFmB80s2ra0p3T7oFAcg6GJwKBshGBl9CH0
+Content-Type: application/json
+
+{
+    "title": "test 1",
+    "description": "test"
+}
+
+###
+
+# DELETE tasks
+DELETE http://localhost:3000/tasks/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBnbWFpbC5jb20iLCJpYXQiOjE3NDI1MjM3NjAsImV4cCI6MTc0MjUyNzM2MH0.U9dN8yTB3bvl3T90azIAfyAlaR-YjLQZUa_bBSSaHQw
+
