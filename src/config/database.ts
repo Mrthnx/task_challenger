@@ -17,7 +17,7 @@ const config: DataSourceOptions = {
     bigNumberStrings: false,
   },
   logging: false,
-  synchronize: true,
+  synchronize: false,
   migrationsRun: true,
   timezone: "+00:00",
   entities: [join(__dirname, "/../module/**/**.entity{.ts,.js}")],

@@ -16,13 +16,11 @@ export class BaseEntity {
 
   @CreateDateColumn({
     nullable: true,
-    name: "create_date",
   })
   createDate?: Date;
 
   @UpdateDateColumn({
     nullable: true,
-    name: "update_date",
   })
   updateDate?: Date;
 
