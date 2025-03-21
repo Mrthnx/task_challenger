@@ -18,6 +18,7 @@ export class AuthController extends Controller {
   }
 
   configureRoutes() {
+    this.router.get("/", this.health);
     this.router.post("/login", [validationSchema(AuthRequestDto)], this.login);
     this.router.post(
       "/register",
@@ -26,6 +27,12 @@ export class AuthController extends Controller {
     );
     return this.router;
   }
+
+  private readonly health = async (_: Request, response: Response) => {
+    handleRequest(async () => {
+      AuthController.returnOkResponse(response, { status: "OK" });
+    }, response);
+  };
 
   private readonly login = async (request: Request, response: Response) => {
     handleRequest(async () => {
