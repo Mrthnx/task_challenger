@@ -15,15 +15,15 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/aws_key.pem
+          chmod 400 ~/.ssh/aws_key.pem
           ssh-keyscan -H ${{ secrets.IP_REMOTE }} >> ~/.ssh/known_hosts
         env:
           IP_REMOTE: ${{ secrets.IP_REMOTE }}
 
       - name: Deploy over SSH
         run: |
-          ssh -i ~/.ssh/id_rsa "ubuntu@${{ secrets.IP_REMOTE }}" << 'EOF'
+          ssh -i ~/.ssh/aws_key.pem ubuntu@${{ secrets.IP_REMOTE }} << 'EOF'
             cd /home/ubuntu/apps/task_challenger
             git pull origin master
             docker build -t backend_reto .
