@@ -1,5 +1,7 @@
 # backend
 
+Use node v23.7.0
+
 To install dependencies:
 
 ```bash
