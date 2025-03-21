@@ -27,6 +27,6 @@ jobs:
             cd /home/ubuntu/apps/task_challenger
             git pull origin master
             docker build -t backend_reto .
-            docker ps -a -q --filter ancestor=backend_reto | head -n 10 | xargs docker rm -f
+            docker ps -a -q --filter ancestor=backend_reto | head -n 10 | xargs docker rm -f || true
             docker run -dit -p 3000:3000 backend_reto
           EOF
