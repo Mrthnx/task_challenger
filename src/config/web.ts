@@ -1,6 +1,7 @@
 import * as express from "express";
 import type { Application } from "express";
 import { injectable } from "inversify";
+import cors from "cors";
 
 @injectable()
 export class WebConfiguration {
@@ -15,10 +16,11 @@ export class WebConfiguration {
   }
 
   private configureCors(app: Application) {
-    app.use(function (_, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Methods", "*");
-      next();
-    });
+    app.use(cors());
+    // app.use(function (_, res, next) {
+    //   res.header("Access-Control-Allow-Origin", "*");
+    //   res.header("Access-Control-Allow-Methods", "*");
+    //   next();
+    // });
   }
 }

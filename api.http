@@ -1,7 +1,7 @@
 ###
 
-# GET login
-POST http://localhost:3000/login
+# Login request
+POST http://3.22.70.164:3000/login
 Content-Type: application/json
 
 {
@@ -10,32 +10,31 @@ Content-Type: application/json
 
 ###
 
-# GET register
-POST http://localhost:3000/register
+# Registration request
+POST http://3.22.70.164:3000/register
 Content-Type: application/json
 
 {
-    "email": "mrthnx1@icloud.com"
+    "email": "mrthnx@icloud.com"
 }
 
 ###
 
-# GET tasks
-GET http://localhost:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNTEyMCwiZXhwIjoxNzQyNTI4NzIwfQ.Z_vAfgd9mFmB80s2ra0p3T7oFAcg6GJwKBshGBl9CH0
-
-
-###
-
-# GET tasks
-GET http://localhost:3000/tasks/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBnbWFpbC5jb20iLCJpYXQiOjE3NDI1MjM3NjAsImV4cCI6MTc0MjUyNzM2MH0.U9dN8yTB3bvl3T90azIAfyAlaR-YjLQZUa_bBSSaHQw
+# Retrieve all tasks
+GET http://3.22.70.164:3000/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxMjQwNywiZXhwIjoxNzQyNjE2MDA3fQ.W2ttOfyMXeiBGf7yqItsix85F32QIPAtpK_ABtRkBmg
 
 ###
 
-# POST tasks
-POST http://localhost:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNDcwNywiZXhwIjoxNzQyNTI4MzA3fQ.XRnJMFe6nW6tkyP-Il_FgHcXf2qN61Zwhq4tjLiBGQs
+# Retrieve a specific task by ID
+GET http://3.22.70.164:3000/tasks/6
+Authorization: Bearer <token>
+
+###
+
+# Create a new task
+POST http://3.22.70.164:3000/tasks
+Authorization: Bearer <token>
 Content-Type: application/json
 
 {
@@ -45,9 +44,9 @@ Content-Type: application/json
 
 ###
 
-# PUT tasks
-PUT http://localhost:3000/tasks/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjYsImlhdCI6MTc0MjUyNTEyMCwiZXhwIjoxNzQyNTI4NzIwfQ.Z_vAfgd9mFmB80s2ra0p3T7oFAcg6GJwKBshGBl9CH0
+# Update an existing task by ID
+PUT http://3.22.70.164:3000/tasks/6
+Authorization: Bearer <token>
 Content-Type: application/json
 
 {
@@ -57,7 +56,8 @@ Content-Type: application/json
 
 ###
 
-# DELETE tasks
-DELETE http://localhost:3000/tasks/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBnbWFpbC5jb20iLCJpYXQiOjE3NDI1MjM3NjAsImV4cCI6MTc0MjUyNzM2MH0.U9dN8yTB3bvl3T90azIAfyAlaR-YjLQZUa_bBSSaHQw
+# Delete a task by ID
+DELETE http://3.22.70.164:3000/tasks/7
+Authorization: Bearer <token>
+
 
