@@ -80,6 +80,7 @@ export default class TaskService extends BaseService<Task, unknown> {
 
     viewModel = new UpdateTaskDto({
       ...viewModel,
+      isCompleted: viewModel.isCompleted ?? false,
     });
 
     return this.taskRepository.create({
