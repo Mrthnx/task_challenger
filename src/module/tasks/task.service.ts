@@ -25,7 +25,7 @@ export default class TaskService extends BaseService<Task, unknown> {
       { user: { id: userId }, state: true },
       ["user"],
     );
-    return tasks;
+    return tasks.sort((task) => (task.isCompleted ? 1 : -1));
   }
 
   async changeStatus(id: number) {
