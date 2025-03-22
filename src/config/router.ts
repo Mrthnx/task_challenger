@@ -20,7 +20,11 @@ export class RoutesConfiguration {
   configure(app: Application) {
     logger.info("Initializing routes");
 
-    app.use(this.authController.configureRoutes());
-    app.use("/tasks", [validateToken], this.taskController.configureRoutes());
+    app.use("/v1", this.authController.configureRoutes());
+    app.use(
+      "/v1/tasks",
+      [validateToken],
+      this.taskController.configureRoutes(),
+    );
   }
 }
