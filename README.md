@@ -66,7 +66,7 @@ curl -X GET http://localhost:3000/health
 
 ## Example APIs
 
-Refer to the [api.http](https://github.com/Mrthnx/task_challenger/blob/master/api.http) file for example API requests.
+Refer to the [swagger task challenge](https://github.com/Mrthnx/task_challenger/blob/master/task_challenge.yml) file for example API requests.
 
 ## Deployment
 
