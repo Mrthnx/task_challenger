@@ -44,13 +44,14 @@ Content-Type: application/json
 ###
 
 # Update an existing task by ID
-PUT http://3.22.70.164:3000/tasks/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYyMzg5MywiZXhwIjoxNzQyNjI3NDkzfQ.WenWqYNoaRIRawLuPAMVp6L65YwCoz1XLQbjD7FpkkU
+PUT http://3.22.70.164:3000/tasks/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYyNjQwMiwiZXhwIjoxNzQyNjMwMDAyfQ.8OXy7YqnBBqer648Dktdg0jELW7TK-L6MpKCFkMITHg
 Content-Type: application/json
 
 {
     "title": "test 1",
-    "description": "test"
+    "description": "test",
+    "isCompleted": null
 }
 
 ###

@@ -50,7 +50,7 @@ npm install
 2. Start the application:
 
 - For development: `npm run dev`
-- For production: `npm run start`
+- For production: `npm run build` and next `npm run start`
 
 ## Database
 
