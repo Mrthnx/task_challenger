@@ -19,11 +19,6 @@ export class WebConfiguration {
   private configureCors(app: Application) {
     const allowedOrigins = ENV.NODE_ENV === "dev" ? "*" : /vercel\.app$/;
 
-    app.use(
-      cors({
-        origin: allowedOrigins,
-        allowedHeaders: "*",
-      }),
-    );
+    app.use(cors());
   }
 }
