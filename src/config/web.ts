@@ -22,6 +22,7 @@ export class WebConfiguration {
     app.use(
       cors({
         origin: allowedOrigins,
+        allowedHeaders: "*",
       }),
     );
   }
