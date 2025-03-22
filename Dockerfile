@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/node:23.7.0-alpine
+FROM bun:latest
 
 #Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -9,14 +9,15 @@ COPY package*.json ./
 # Copia el resto de la aplicación
 COPY . .
 
-# Instala las dependencias del proyecto
-RUN npm install
+# Instala las dependencias del proyecto usando bun
+RUN bun install
 
 # Compila la aplicación
-RUN npm run build
+RUN bun run build
 
 # Expone el puerto que usa la aplicación (ajusta si usas un puerto diferente)
 EXPOSE 3000
 
 # Define el comando para iniciar la aplicación
-CMD ["npm", "run", "start"]
+CMD ["bun", "run", "start"]
+
