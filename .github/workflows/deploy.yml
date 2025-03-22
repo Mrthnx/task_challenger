@@ -28,5 +28,6 @@ jobs:
             git pull origin master
             docker ps -a -q --filter ancestor=backend_reto | head -n 10 | xargs docker rm -f || true
             docker build -t backend_reto .
+            docker images -f "dangling=true" -q | xargs -r docker rmi
             docker run -dit -p 3000:3000 backend_reto
           EOF
