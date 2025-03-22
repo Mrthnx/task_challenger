@@ -23,7 +23,11 @@ export default class AuthService {
       throw new AppError(HTTP_CODE_UNAUTHORIZED, "Invalid credentials");
     }
     const user = await this.userRepository.findOne({ email });
-    return signToken({ email, id: user.id });
+    return {
+      token: signToken({ email, id: user.id }),
+      id: user.id,
+      email: user.email,
+    };
   }
 
   async register({ email }: SignUpRequestDto) {
@@ -32,6 +36,10 @@ export default class AuthService {
       throw new AppError(HTTP_CODE_CONFLICT, "User already exists");
     }
     const user = await this.userRepository.save({ email } as User);
-    return signToken({ email, id: user.id });
+    return {
+      token: signToken({ email, id: user.id }),
+      id: user.id,
+      email: user.email,
+    };
   }
 }
