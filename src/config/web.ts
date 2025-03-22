@@ -2,6 +2,7 @@ import * as express from "express";
 import type { Application } from "express";
 import { injectable } from "inversify";
 import cors from "cors";
+import { ENV } from "./environment";
 
 @injectable()
 export class WebConfiguration {
@@ -16,11 +17,12 @@ export class WebConfiguration {
   }
 
   private configureCors(app: Application) {
-    app.use(cors());
-    // app.use(function (_, res, next) {
-    //   res.header("Access-Control-Allow-Origin", "*");
-    //   res.header("Access-Control-Allow-Methods", "*");
-    //   next();
-    // });
+    const allowedOrigins = ENV.NODE_ENV === "dev" ? "*" : /vercel\.app$/;
+
+    app.use(
+      cors({
+        origin: allowedOrigins,
+      }),
+    );
   }
 }
