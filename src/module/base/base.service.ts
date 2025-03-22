@@ -22,7 +22,12 @@ export class BaseService<Entity extends BaseEntity, ViewModel> {
 
   async update(id: number, viewModel: ViewModel) {
     const viewModelToUpdate = await this.updateValidation({ ...viewModel, id });
+    const entityFind = await this.repository.findOne({
+      id,
+      state: true,
+    } as FindOptionsWhere<Entity>);
     const entityToUpdate = this.repository.create({
+      ...entityFind,
       ...viewModelToUpdate,
       id,
     } as unknown as Entity);
