@@ -22,31 +22,30 @@ Content-Type: application/json
 
 # Retrieve all tasks
 GET http://3.22.70.164:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxMjQwNywiZXhwIjoxNzQyNjE2MDA3fQ.W2ttOfyMXeiBGf7yqItsix85F32QIPAtpK_ABtRkBmg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxODczOCwiZXhwIjoxNzQyNjIyMzM4fQ.PvJuFH9qZuhcPkxD4Yn7SbcR6jPqpnanpCCg8NLuNQk
 
 ###
 
 # Retrieve a specific task by ID
 GET http://3.22.70.164:3000/tasks/6
-Authorization: Bearer <token>
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxMjQwNywiZXhwIjoxNzQyNjE2MDA3fQ.W2ttOfyMXeiBGf7yqItsix85F32QIPAtpK_ABtRkBmg
 ###
 
 # Create a new task
 POST http://3.22.70.164:3000/tasks
-Authorization: Bearer <token>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYyMDM4OCwiZXhwIjoxNzQyNjIzOTg4fQ.dhoqiHJmG-60Lz98ZzXSyE73TwdbJ3WEUpQVQACCi1g
 Content-Type: application/json
 
 {
-    "title": "test",
-    "description": "test"
+    "title": "test 4",
+    "description": "test lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
 }
 
 ###
 
 # Update an existing task by ID
-PUT http://3.22.70.164:3000/tasks/6
-Authorization: Bearer <token>
+PUT http://3.22.70.164:3000/tasks/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxMjQwNywiZXhwIjoxNzQyNjE2MDA3fQ.W2ttOfyMXeiBGf7yqItsix85F32QIPAtpK_ABtRkBmg
 Content-Type: application/json
 
 {
