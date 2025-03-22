@@ -1,4 +1,4 @@
-FROM bun:latest
+FROM oven/bun:latest
 
 #Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
