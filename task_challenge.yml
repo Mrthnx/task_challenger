@@ -1,0 +1,249 @@
+openapi: 3.0.0
+info:
+  title: Tasks API
+  version: 1.0.0
+servers:
+  - url: http://3.22.70.164:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: boolean
+        createDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+        email:
+          type: string
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: boolean
+        createDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        isCompleted:
+          type: boolean
+        user:
+          $ref: "#/components/schemas/User"
+    AuthResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+            id:
+              type: integer
+            email:
+              type: string
+    TaskResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/Task"
+    TaskListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Task"
+paths:
+  /login:
+    post:
+      summary: Login with email
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        "200":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /tasks:
+    get:
+      summary: Get all tasks
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskListResponse"
+
+    post:
+      summary: Create a new task
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskResponse"
+
+  /tasks/{id}:
+    get:
+      summary: Get a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskResponse"
+
+    put:
+      summary: Update a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                isCompleted:
+                  type: boolean
+                  nullable: true
+      responses:
+        "204":
+          description: No content
+
+    delete:
+      summary: Delete a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No content
+
+    patch:
+      summary: Partially update a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                isCompleted:
+                  type: boolean
+      responses:
+        "200":
+          description: Task updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskResponse"

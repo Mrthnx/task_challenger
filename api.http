@@ -1,6 +1,14 @@
 ###
 
 # Login request
+# Response 
+# {
+#   "data": {
+#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjY3NDMzMywiZXhwIjoxNzQyNjc3OTMzfQ.fFpau-r3sA_6XzD1Eq3rcKmClRdeBuvUequhqY9Kshk",
+#     "id": 1,
+#     "email": "mrthnx@icloud.com"
+#   }
+# }
 POST http://3.22.70.164:3000/login
 Content-Type: application/json
 
@@ -11,6 +19,14 @@ Content-Type: application/json
 ###
 
 # Registration request
+# Response 
+# {
+#   "data": {
+#     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjY3NDMzMywiZXhwIjoxNzQyNjc3OTMzfQ.fFpau-r3sA_6XzD1Eq3rcKmClRdeBuvUequhqY9Kshk",
+#     "id": 1,
+#     "email": "mrthnx@icloud.com"
+#   }
+# }
 POST http://3.22.70.164:3000/register
 Content-Type: application/json
 
@@ -21,19 +37,65 @@ Content-Type: application/json
 ###
 
 # Retrieve all tasks
+# Response
+# {
+#   "data": [
+#     {
+#       "id": 6,
+#       "state": true,
+#       "createDate": "2025-03-22T05:13:57.860Z",
+#       "updateDate": "2025-03-22T06:55:03.261Z",
+#       "title": "test 1",
+#       "description": "test",
+#       "isCompleted": false,
+#       "user": {
+#         "id": 1,
+#         "state": true,
+#         "createDate": "2025-03-22T02:59:59.849Z",
+#         "updateDate": "2025-03-22T02:59:59.849Z",
+#         "email": "mrthnx@icloud.com"
+#       }
+#     }
+#   ]
+# }  
 GET http://3.22.70.164:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxODczOCwiZXhwIjoxNzQyNjIyMzM4fQ.PvJuFH9qZuhcPkxD4Yn7SbcR6jPqpnanpCCg8NLuNQk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjY3NDMzMywiZXhwIjoxNzQyNjc3OTMzfQ.fFpau-r3sA_6XzD1Eq3rcKmClRdeBuvUequhqY9Kshk
 
 ###
 
 # Retrieve a specific task by ID
+# Response
+# {
+#   "data": {
+#     "id": 6,
+#     "state": true,
+#     "createDate": "2025-03-22T05:13:57.860Z",
+#     "updateDate": "2025-03-22T06:55:03.261Z",
+#     "title": "test 1",
+#     "description": "test",
+#     "isCompleted": false
+#   }
+# }
 GET http://3.22.70.164:3000/tasks/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxMjQwNywiZXhwIjoxNzQyNjE2MDA3fQ.W2ttOfyMXeiBGf7yqItsix85F32QIPAtpK_ABtRkBmg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjY3NDMzMywiZXhwIjoxNzQyNjc3OTMzfQ.fFpau-r3sA_6XzD1Eq3rcKmClRdeBuvUequhqY9Kshk
 ###
 
 # Create a new task
+# Response
+# {
+#   "data": {
+#     "id": 11,
+#     "state": true,
+#     "title": "test lorem ipsum dolor sit amet",
+#     "description": "test lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+#     "isCompleted": false,
+#     "user": { "id": 1, "state": true },
+#     "createDate": "2025-03-22T20:19:01.457Z",
+#     "updateDate": "2025-03-22T20:19:01.457Z"
+#   }
+# }
 POST http://3.22.70.164:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYyMDM4OCwiZXhwIjoxNzQyNjIzOTg4fQ.dhoqiHJmG-60Lz98ZzXSyE73TwdbJ3WEUpQVQACCi1g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjY3NDMzMywiZXhwIjoxNzQyNjc3OTMzfQ.fFpau-r3sA_6XzD1Eq3rcKmClRdeBuvUequhqY9Kshk
 Content-Type: application/json
 
 {
@@ -44,6 +106,7 @@ Content-Type: application/json
 ###
 
 # Update an existing task by ID
+# Response not content
 PUT http://3.22.70.164:3000/tasks/6
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYyNjQwMiwiZXhwIjoxNzQyNjMwMDAyfQ.8OXy7YqnBBqer648Dktdg0jELW7TK-L6MpKCFkMITHg
 Content-Type: application/json
@@ -57,11 +120,25 @@ Content-Type: application/json
 ###
 
 # Delete a task by ID
+# Response not content
 DELETE http://3.22.70.164:3000/tasks/7
 Authorization: Bearer <token>
 
 ### 
 
 # PATCH 
+# Response
+# {
+#   "data": {
+#     "id": 11,
+#     "state": true,
+#     "title": "test lorem ipsum dolor sit amet",
+#     "description": "test lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+#     "isCompleted": false,
+#     "user": { "id": 1, "state": true },
+#     "createDate": "2025-03-22T20:19:01.457Z",
+#     "updateDate": "2025-03-22T20:19:01.457Z"
+#   }
+# }
 PATCH http://3.22.70.164:3000/tasks/7
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ydGhueEBpY2xvdWQuY29tIiwiaWQiOjEsImlhdCI6MTc0MjYxODczOCwiZXhwIjoxNzQyNjIyMzM4fQ.PvJuFH9qZuhcPkxD4Yn7SbcR6jPqpnanpCCg8NLuNQk
