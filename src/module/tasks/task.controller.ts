@@ -34,7 +34,8 @@ export default class TaskController extends BaseController<Task, unknown> {
   ) => {
     handleRequest(async () => {
       const userId = request.user.id;
-      const tasks = await this.taskService.getAllByUser(userId);
+      const search = request.query.search as string;
+      const tasks = await this.taskService.getAllByUser(userId, search);
       TaskController.returnOkResponse(response, tasks);
     }, response);
   };

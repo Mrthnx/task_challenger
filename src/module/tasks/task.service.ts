@@ -9,6 +9,7 @@ import AppError from "../../utils/app.error";
 import { UserRepository } from "../users/user.repository";
 import UpdateTaskDto from "./dtos/update-task.dto";
 import { UserRequest } from "../../utils/app.interfaces";
+import { ILike } from "typeorm";
 
 export default class TaskService extends BaseService<Task, unknown> {
   constructor(
@@ -20,9 +21,14 @@ export default class TaskService extends BaseService<Task, unknown> {
     super(taskRepository);
   }
 
-  async getAllByUser(userId: number) {
+  async getAllByUser(userId: number, search: string = "") {
     const tasks = await this.taskRepository.findAll(
-      { user: { id: userId }, state: true },
+      {
+        user: { id: userId },
+        state: true,
+        title: ILike(`%${search}%`),
+        description: ILike(`%${search}%`),
+      },
       ["user"],
     );
     return tasks.sort((task) => (task.isCompleted ? 1 : -1));
