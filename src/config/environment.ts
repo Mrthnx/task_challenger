@@ -3,6 +3,8 @@ import Joi from "joi";
 
 dotenv.config();
 
+const NODE_ENV = process.env.NODE_ENV || "dev";
+
 const EXPIRES_IN_SEC = 3600;
 
 const schema = Joi.object({
@@ -43,7 +45,7 @@ const { error } = schema.validate({
   },
 });
 
-if (error) {
+if (error && NODE_ENV !== "test") {
   throw new Error(`Environment validation error: ${error.message}`);
 }
 

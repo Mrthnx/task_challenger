@@ -7,8 +7,8 @@
     "compile": "npx tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/app.js\"",
     "start": "node dist/app.js",
-    "test": "jest",
-    "test:cov": "jest --coverage",
+    "test": "NODE_ENV=test jest",
+    "test:cov": "NODE_ENV=test jest --coverage",
     "typeorm:cache": "npx typeorm-ts-node-commonjs cache:clear -d ./src/config/database.ts",
     "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/migration -d ./src/config/database.ts"
   },
