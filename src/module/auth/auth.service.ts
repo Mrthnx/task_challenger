@@ -10,6 +10,9 @@ import {
 import AppError from "../../utils/app.error";
 import { User } from "../users/user.entity";
 import { SignUpRequestDto } from "./dtos/sign-up.request.dto";
+import { loggerApp } from "../../config/logger";
+
+const logger = loggerApp("AuthService");
 
 export default class AuthService {
   constructor(
@@ -20,6 +23,7 @@ export default class AuthService {
   async login({ email }: AuthRequestDto) {
     const exist = await this.userRepository.existsByEmail(email);
     if (!exist) {
+      logger.error(`User ${email} not found`);
       throw new AppError(HTTP_CODE_UNAUTHORIZED, "Invalid credentials");
     }
     const user = await this.userRepository.findOne({ email });
@@ -33,6 +37,7 @@ export default class AuthService {
   async register({ email }: SignUpRequestDto) {
     const exist = await this.userRepository.existsByEmail(email);
     if (exist) {
+      logger.error(`User ${email} already exists`);
       throw new AppError(HTTP_CODE_CONFLICT, "User already exists");
     }
     const user = await this.userRepository.save({ email } as User);

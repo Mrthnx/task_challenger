@@ -10,6 +10,9 @@ import { UserRepository } from "../users/user.repository";
 import UpdateTaskDto from "./dtos/update-task.dto";
 import { UserRequest } from "../../utils/app.interfaces";
 import { ILike } from "typeorm";
+import { loggerApp } from "../../config/logger";
+
+const logger = loggerApp("TaskService");
 
 export default class TaskService extends BaseService<Task, unknown> {
   constructor(
@@ -27,7 +30,6 @@ export default class TaskService extends BaseService<Task, unknown> {
         user: { id: userId },
         state: true,
         title: ILike(`%${search}%`),
-        description: ILike(`%${search}%`),
       },
       ["user"],
     );
@@ -38,6 +40,7 @@ export default class TaskService extends BaseService<Task, unknown> {
     const task = await this.taskRepository.findOne({ id, state: true });
 
     if (!task) {
+      logger.error(`Task ${id} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "Task does not exist");
     }
 
@@ -55,6 +58,7 @@ export default class TaskService extends BaseService<Task, unknown> {
       where: { id: userId, state: true },
     });
     if (!existsUser) {
+      logger.error(`User ${userId} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "User does not exist");
     }
 
@@ -81,6 +85,7 @@ export default class TaskService extends BaseService<Task, unknown> {
     });
 
     if (!existsTask) {
+      logger.error(`Task ${viewModel.id} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "Task does not exist");
     }
 
@@ -107,6 +112,7 @@ export default class TaskService extends BaseService<Task, unknown> {
       relations: ["user"],
     });
     if (!existsTask) {
+      logger.error(`Task ${id} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "Task does not exist");
     }
   }

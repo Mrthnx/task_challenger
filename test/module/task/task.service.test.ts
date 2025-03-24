@@ -1,3 +1,4 @@
+import { ILike } from "typeorm";
 import { Task } from "../../../src/module/tasks/task.entity";
 import TaskService from "../../../src/module/tasks/task.service";
 import AppError from "../../../src/utils/app.error";
@@ -37,7 +38,7 @@ describe("TaskService", () => {
       const result = await taskService.getAllByUser(userId);
 
       expect(mockTaskRepository.findAll).toHaveBeenCalledWith(
-        { user: { id: userId }, state: true },
+        { user: { id: userId }, state: true, title: ILike(`%%`) },
         ["user"],
       );
       expect(result[0].isCompleted).toBe(false);

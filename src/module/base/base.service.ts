@@ -4,6 +4,9 @@ import { BaseRepository } from "./base.repository";
 import { BaseEntity } from "./base.entity";
 import { HTTP_CODE_NOT_FOUND } from "../../config/constants";
 import AppError from "../../utils/app.error";
+import { loggerApp } from "../../config/logger";
+
+const logger = loggerApp("BaseService");
 
 @injectable()
 export class BaseService<Entity extends BaseEntity, ViewModel> {
@@ -44,6 +47,7 @@ export class BaseService<Entity extends BaseEntity, ViewModel> {
       ...where,
     } as FindOptionsWhere<Entity>);
     if (!entity) {
+      logger.error(`Entity ${id} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "Entity does not exist");
     }
     return this.mapToViewModel(entity);
@@ -63,6 +67,7 @@ export class BaseService<Entity extends BaseEntity, ViewModel> {
       where: { id, state: true },
     } as FindManyOptions<Entity>);
     if (!existsEntity) {
+      logger.error(`Entity ${id} not found`);
       throw new AppError(HTTP_CODE_NOT_FOUND, "Entity does not exist");
     }
     await this.repository.delete(id);

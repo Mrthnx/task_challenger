@@ -5,6 +5,9 @@ import {
   HTTP_CODE_NO_CONTENT,
   HTTP_CODE_INTERNAL_ERROR,
 } from "../../config/constants";
+import { loggerApp } from "../../config/logger";
+
+const logger = loggerApp("Controller");
 
 @injectable()
 export class Controller {
@@ -27,6 +30,7 @@ export class Controller {
   }
 
   configureRoutes(): void {
+    logger.error("Controller not configured");
     throw new Error("Not implemented!");
   }
 

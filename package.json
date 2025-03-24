@@ -7,7 +7,7 @@
     "compile": "npx tsc",
     "dev": "tsc-watch --onSuccess \"node ./dist/app.js\"",
     "start": "node dist/app.js",
-    "test": "jest --watch",
+    "test": "jest",
     "test:cov": "jest --coverage",
     "typeorm:cache": "npx typeorm-ts-node-commonjs cache:clear -d ./src/config/database.ts",
     "migration:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/migration -d ./src/config/database.ts"
@@ -36,6 +36,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "inversify": "^7.1.0",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.3",
     "pino": "^9.6.0",
