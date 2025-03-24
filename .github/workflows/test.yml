@@ -27,7 +27,7 @@ jobs:
 
       - name: Upload test artifact
         if: success()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-status
           path: . # puede ser cualquier archivo dummy (o uno generado por tests)
