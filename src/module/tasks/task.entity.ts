@@ -1,4 +1,4 @@
-import { Entity, Column, Relation, ManyToOne } from "typeorm";
+import { Entity, Column, Relation, ManyToOne, Index } from "typeorm";
 import { BaseEntity } from "../base/base.entity";
 import { User } from "../users/user.entity";
 
@@ -10,6 +10,7 @@ export class Task extends BaseEntity {
   @Column()
   description: string;
 
+  @Index()
   @Column()
   isCompleted: boolean;
 

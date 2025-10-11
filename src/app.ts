@@ -16,13 +16,21 @@ const logger = loggerApp("app");
 applyConfigurationContainer();
 
 const initializedDataBase = async () => {
-  logger.info("Database connection established");
-  await dataSource.initialize();
-  applyContainer(dataSource);
-  continueConfiguration();
+  try {
+    await dataSource.initialize();
+    logger.info("Database connection established");
+    applyContainer(dataSource);
+    continueConfiguration();
+  } catch (error) {
+    logger.error({ error }, "Failed to connect to database");
+    process.exit(1);
+  }
 };
 
-initializedDataBase();
+initializedDataBase().catch((error) => {
+  logger.error({ error }, "Unhandled database error");
+  process.exit(1);
+});
 
 const continueStart = (app: Application) => {
   app.listen(ENV.APP.PORT, () =>

@@ -3,10 +3,10 @@ import { ENV } from "./environment";
 import { join } from "path";
 
 const config: DataSourceOptions = {
-  type: ENV.DATABASE.TYPE as "mysql",
+  type: (ENV.DATABASE.TYPE || "postgres") as "postgres" | "mysql",
   charset: "utf8mb4",
   host: ENV.DATABASE.HOST,
-  port: parseInt(ENV.DATABASE.PORT || "3306"),
+  port: parseInt(ENV.DATABASE.PORT || "5432"),
   username: ENV.DATABASE.USERNAME,
   password: ENV.DATABASE.PASSWORD,
   database: ENV.DATABASE.NAME,
@@ -16,7 +16,7 @@ const config: DataSourceOptions = {
     supportBigNumbers: true,
     bigNumberStrings: false,
   },
-  logging: false,
+  logging: ENV.DATABASE.LOGGING === "true" && ENV.NODE_ENV !== "production",
   synchronize: false,
   migrationsRun: true,
   timezone: "+00:00",

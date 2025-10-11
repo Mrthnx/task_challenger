@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -24,8 +25,8 @@ export class BaseEntity {
   })
   updateDate?: Date;
 
-  constructor(id: number | null) {
-    this.id = id;
-    this.state = true;
-  }
+  @DeleteDateColumn({
+    nullable: true,
+  })
+  deletedAt?: Date;
 }

@@ -1,16 +1,17 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { TYPES } from "../../config/types";
 import { BaseController } from "../base/base.controller";
 import { Task } from "./task.entity";
-import TaskService from "./task.service";
+import { TaskService } from "./task.service";
 import { validationSchema } from "../../utils/app.middleware";
-import CreateTaskDto from "./dtos/create-task.dto";
-import UpdateTaskDto from "./dtos/update-task.dto";
+import { CreateTaskDto } from "./dtos/create-task.dto";
+import { UpdateTaskDto } from "./dtos/update-task.dto";
 import { handleRequest, parseSecureInt } from "../../utils/app.util";
 import { Response } from "express";
 import { AppRequest } from "../../utils/app.interfaces";
 
-export default class TaskController extends BaseController<Task, unknown> {
+@injectable()
+export class TaskController extends BaseController<Task, unknown> {
   constructor(
     @inject(TYPES.TaskService)
     private readonly taskService: TaskService,

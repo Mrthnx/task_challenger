@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { TYPES } from "../../config/types";
 import { UserRepository } from "../users/user.repository";
 import { AuthRequestDto } from "./dtos/auth.request.dto";
@@ -14,7 +14,8 @@ import { loggerApp } from "../../config/logger";
 
 const logger = loggerApp("AuthService");
 
-export default class AuthService {
+@injectable()
+export class AuthService {
   constructor(
     @inject(TYPES.UserRepository)
     private readonly userRepository: UserRepository,

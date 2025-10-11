@@ -4,11 +4,13 @@ import { WebConfiguration } from "./web";
 import { RoutesConfiguration } from "./router";
 import { DataSource } from "typeorm";
 import { AuthController } from "../module/auth/auth.controller";
-import AuthService from "../module/auth/auth.service";
+import { AuthService } from "../module/auth/auth.service";
+import { HealthController } from "../module/health/health.controller";
+import { HealthService } from "../module/health/health.service";
 import { UserRepository } from "../module/users/user.repository";
-import TaskRepository from "../module/tasks/task.repository";
-import TaskService from "../module/tasks/task.service";
-import TaskController from "../module/tasks/task.controller";
+import { TaskRepository } from "../module/tasks/task.repository";
+import { TaskService } from "../module/tasks/task.service";
+import { TaskController } from "../module/tasks/task.controller";
 
 const container = new Container();
 
@@ -36,6 +38,16 @@ export const applyContainer = (connection: DataSource) => {
   container
     .bind<AuthService>(TYPES.AuthService)
     .to(AuthService)
+    .inSingletonScope();
+
+  container
+    .bind<HealthController>(TYPES.HealthController)
+    .to(HealthController)
+    .inSingletonScope();
+
+  container
+    .bind<HealthService>(TYPES.HealthService)
+    .to(HealthService)
     .inSingletonScope();
 
   container

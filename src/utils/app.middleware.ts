@@ -7,6 +7,22 @@ import {
 } from "../config/constants";
 import { verifyToken } from "./app.jwt";
 import { AppRequest, UserRequest } from "./app.interfaces";
+import { randomUUID } from "crypto";
+import { loggerApp } from "../config/logger";
+
+export const requestLogger = (req: Request, res: Response, next: NextFunction) => {
+  const requestId = randomUUID();
+  const userId = (req as AppRequest).user?.id;
+  
+  (req as any).log = loggerApp("request").child({ 
+    requestId, 
+    userId,
+    method: req.method,
+    path: req.path,
+  });
+  
+  next();
+};
 
 export const validationSchema = (dtoClass: ClassConstructor<Object>) => {
   return async (req: Request, res: Response, next: NextFunction) => {

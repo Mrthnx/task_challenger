@@ -30,22 +30,22 @@ const { error } = schema.validate({
   NODE_ENV: process.env.NODE_ENV,
   APP: {
     PORT: process.env.APP_PORT || "3000",
-    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_SECRET: process.env.JWT_SECRET || (NODE_ENV === "test" ? "test-secret" : undefined),
     JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN ?? EXPIRES_IN_SEC,
   },
   DATABASE: {
-    TYPE: process.env.DATABASE_TYPE || "mysql",
-    HOST: process.env.DATABASE_HOST || "localhost",
-    PORT: process.env.DATABASE_PORT || "3306",
-    USERNAME: process.env.DATABASE_USERNAME || "",
-    PASSWORD: process.env.DATABASE_PASSWORD || "",
-    NAME: process.env.DATABASE_NAME || "",
-    MAX_POOL_SIZE: process.env.DATABASE_MAX_POOL_SIZE,
-    LOGGING: process.env.DATABASE_LOGGING,
+    TYPE: process.env.DATABASE_TYPE || (NODE_ENV === "test" ? "postgres" : "postgres"),
+    HOST: process.env.DATABASE_HOST || (NODE_ENV === "test" ? "localhost" : "localhost"),
+    PORT: process.env.DATABASE_PORT || (NODE_ENV === "test" ? "5432" : "5432"),
+    USERNAME: process.env.DATABASE_USERNAME || (NODE_ENV === "test" ? "test" : ""),
+    PASSWORD: process.env.DATABASE_PASSWORD || (NODE_ENV === "test" ? "test" : ""),
+    NAME: process.env.DATABASE_NAME || (NODE_ENV === "test" ? "test_db" : ""),
+    MAX_POOL_SIZE: process.env.DATABASE_MAX_POOL_SIZE || (NODE_ENV === "test" ? 5 : 10),
+    LOGGING: process.env.DATABASE_LOGGING || (NODE_ENV === "test" ? false : false),
   },
 });
 
-if (error && NODE_ENV !== "test") {
+if (error) {
   throw new Error(`Environment validation error: ${error.message}`);
 }
 

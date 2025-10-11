@@ -1,6 +1,8 @@
-import { IsString, IsBoolean, IsOptional } from "class-validator";
+import { IsString, IsBoolean, IsOptional, IsInt, IsPositive } from "class-validator";
 
-export default class UpdateTaskDto {
+export class UpdateTaskDto {
+  @IsInt()
+  @IsPositive()
   id: number;
 
   @IsString()
@@ -15,6 +17,8 @@ export default class UpdateTaskDto {
   @IsOptional()
   isCompleted: boolean = false;
 
+  @IsInt()
+  @IsPositive()
   userId: number;
 
   constructor(data?: Partial<UpdateTaskDto>) {

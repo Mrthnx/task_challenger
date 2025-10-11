@@ -10,16 +10,13 @@ const config: Config = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    "^.+\\.(ts|tsx)$": ["ts-jest", {
+      tsconfig: "tsconfig.json",
+    }],
   },
   clearMocks: true,
   coverageDirectory: "coverage",
   collectCoverageFrom: ["src/**/*.{ts,js}", "!**/node_modules/**"],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.json",
-    },
-  },
 };
 
 export default config;

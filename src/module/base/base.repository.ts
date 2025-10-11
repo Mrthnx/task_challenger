@@ -1,7 +1,6 @@
 import { injectable, unmanaged } from "inversify";
-import { FindManyOptions, FindOptionsWhere, Repository } from "typeorm";
+import { FindManyOptions, FindOptionsOrder, FindOptionsWhere, Repository } from "typeorm";
 import { BaseEntity } from "./base.entity";
-import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity.js";
 
 @injectable()
 export class BaseRepository<Entity extends BaseEntity> {
@@ -18,10 +17,12 @@ export class BaseRepository<Entity extends BaseEntity> {
   async findAll(
     where: FindOptionsWhere<Entity>,
     relations?: string[],
+    order?: FindOptionsOrder<Entity>,
   ): Promise<Entity[]> {
     return await this.repository.find({
       where,
       relations,
+      order,
     });
   }
 
@@ -40,12 +41,10 @@ export class BaseRepository<Entity extends BaseEntity> {
   }
 
   async delete(id: number) {
-    return await this.repository.update(
-      { id } as FindOptionsWhere<Entity>,
-      {
-        id,
-        state: false,
-      } as unknown as QueryDeepPartialEntity<Entity>,
-    );
+    return await this.repository.softDelete(id);
+  }
+
+  async restore(id: number) {
+    return await this.repository.restore(id);
   }
 }

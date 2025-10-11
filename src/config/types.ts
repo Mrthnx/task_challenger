@@ -7,6 +7,9 @@ export const TYPES = {
   AuthController: Symbol("AuthController"),
   AuthService: Symbol("AuthService"),
 
+  HealthController: Symbol("HealthController"),
+  HealthService: Symbol("HealthService"),
+
   UserRepository: Symbol("UserRepository"),
 
   TaskController: Symbol("TaskController"),

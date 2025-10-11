@@ -5,8 +5,17 @@ import { validationSchema } from "../../utils/app.middleware";
 import { AuthRequestDto } from "./dtos/auth.request.dto";
 import { handleRequest } from "../../utils/app.util";
 import { TYPES } from "../../config/types";
-import AuthService from "./auth.service";
+import { AuthService } from "./auth.service";
 import { SignUpRequestDto } from "./dtos/sign-up.request.dto";
+import rateLimit from "express-rate-limit";
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 requests per window
+  message: "Too many requests from this IP, please try again later",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 @injectable()
 export class AuthController extends Controller {
@@ -18,21 +27,14 @@ export class AuthController extends Controller {
   }
 
   configureRoutes() {
-    this.router.get("/", this.health);
-    this.router.post("/login", [validationSchema(AuthRequestDto)], this.login);
+    this.router.post("/login", [authLimiter, validationSchema(AuthRequestDto)], this.login);
     this.router.post(
       "/register",
-      [validationSchema(SignUpRequestDto)],
+      [authLimiter, validationSchema(SignUpRequestDto)],
       this.register,
     );
     return this.router;
   }
-
-  private readonly health = async (_: Request, response: Response) => {
-    handleRequest(async () => {
-      AuthController.returnOkResponse(response, { status: "OK" });
-    }, response);
-  };
 
   private readonly login = async (request: Request, response: Response) => {
     handleRequest(async () => {

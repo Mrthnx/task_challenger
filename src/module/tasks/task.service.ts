@@ -1,20 +1,21 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { BaseService } from "../base/base.service";
 import { Task } from "./task.entity";
 import { TYPES } from "../../config/types";
-import TaskRepository from "./task.repository";
-import CreateTaskDto from "./dtos/create-task.dto";
+import { TaskRepository } from "./task.repository";
+import { CreateTaskDto } from "./dtos/create-task.dto";
 import { HTTP_CODE_NOT_FOUND } from "../../config/constants";
 import AppError from "../../utils/app.error";
 import { UserRepository } from "../users/user.repository";
-import UpdateTaskDto from "./dtos/update-task.dto";
+import { UpdateTaskDto } from "./dtos/update-task.dto";
 import { UserRequest } from "../../utils/app.interfaces";
 import { ILike } from "typeorm";
 import { loggerApp } from "../../config/logger";
 
 const logger = loggerApp("TaskService");
 
-export default class TaskService extends BaseService<Task, unknown> {
+@injectable()
+export class TaskService extends BaseService<Task, unknown> {
   constructor(
     @inject(TYPES.TaskRepository)
     private readonly taskRepository: TaskRepository,
@@ -31,9 +32,10 @@ export default class TaskService extends BaseService<Task, unknown> {
         state: true,
         title: ILike(`%${search}%`),
       },
-      ["user"],
+      undefined,
+      { isCompleted: "ASC" },
     );
-    return tasks.sort((task) => (task.isCompleted ? 1 : -1));
+    return tasks;
   }
 
   async changeStatus(id: number) {

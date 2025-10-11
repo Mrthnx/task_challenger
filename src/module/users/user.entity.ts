@@ -1,9 +1,10 @@
-import { Entity, Column, OneToMany, Relation } from "typeorm";
+import { Entity, Column, OneToMany, Relation, Index } from "typeorm";
 import { Task } from "../tasks/task.entity";
 import { BaseEntity } from "../base/base.entity";
 
 @Entity({ name: "users" })
 export class User extends BaseEntity {
+  @Index()
   @Column({
     unique: true,
   })

@@ -1,6 +1,7 @@
 import { BaseController } from "../module/base/base.controller";
 import { Response } from "express";
 import AppError from "./app.error";
+import { HTTP_CODE_BAD_REQUEST } from "../config/constants";
 
 export const isNewEntity = (entity: { id: number | null }): boolean => {
   return entity == null || !isValidNumberAsId(entity.id);
@@ -34,7 +35,7 @@ export const isBlankString = (value: string | undefined) => {
 export const parseSecureInt = (value: number | undefined) => {
   const parseValue = parseInt(String(value), 10);
   if (isNaN(parseValue)) {
-    throw new Error("Invalid number");
+    throw new AppError(HTTP_CODE_BAD_REQUEST, "Invalid ID parameter");
   }
   return parseValue;
 };
