@@ -1,4 +1,4 @@
-import { Application, Request, Response, NextFunction } from "express";
+import { Application, ErrorRequestHandler } from "express";
 import { inject, injectable } from "inversify";
 import { loggerApp } from "./logger";
 import { TYPES } from "./types";
@@ -33,12 +33,15 @@ export class RoutesConfiguration {
     );
 
     // Global error handler - must be after all routes
-    app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
       logger.error({ error: err }, "Unhandled error");
       if (err instanceof AppError) {
-        return res.status(err.status).json({ message: err.message });
+        res.status(err.status).json({ message: err.message });
+        return;
       }
-      return res.status(500).json({ message: "Internal server error" });
-    });
+      res.status(500).json({ message: "Internal server error" });
+    };
+    
+    app.use(errorHandler);
   }
 }
