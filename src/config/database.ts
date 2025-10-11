@@ -17,7 +17,7 @@ const config: DataSourceOptions = {
     bigNumberStrings: false,
   },
   logging: ENV.DATABASE.LOGGING === "true" && ENV.NODE_ENV !== "production",
-  synchronize: false,
+  synchronize: true,
   migrationsRun: true,
   timezone: "+00:00",
   entities: [join(__dirname, "/../module/**/**.entity{.ts,.js}")],
