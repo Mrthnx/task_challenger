@@ -20,12 +20,12 @@ RUN bun install
 RUN bun run build
 
 # Crea un usuario no-root para ejecutar la aplicación
-RUN addgroup --system --gid 1001 appgroup && \
-    adduser --system --uid 1001 --ingroup appgroup appuser && \
-    chown -R appuser:appgroup /app
+#RUN addgroup --system --gid 1001 appgroup && \
+#    adduser --system --uid 1001 --ingroup appgroup appuser && \
+#    chown -R appuser:appgroup /app
 
 # Cambia al usuario no-root
-USER appuser
+#USER appuser
 
 # Expone el puerto que usa la aplicación (ajusta si usas un puerto diferente)
 EXPOSE 3000
