@@ -1,4 +1,11 @@
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsPositive, IsString } from "class-validator";
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsPositive,
+  IsString,
+} from "class-validator";
 
 export class CreateTaskDto {
   @IsString()
@@ -11,6 +18,7 @@ export class CreateTaskDto {
 
   @IsInt()
   @IsPositive()
+  @IsOptional()
   userId: number;
 
   @IsBoolean()
