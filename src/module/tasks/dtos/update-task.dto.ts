@@ -1,8 +1,15 @@
-import { IsString, IsBoolean, IsOptional, IsInt, IsPositive } from "class-validator";
+import {
+  IsString,
+  IsBoolean,
+  IsOptional,
+  IsInt,
+  IsPositive,
+} from "class-validator";
 
 export class UpdateTaskDto {
   @IsInt()
   @IsPositive()
+  @IsOptional()
   id: number;
 
   @IsString()
@@ -19,6 +26,7 @@ export class UpdateTaskDto {
 
   @IsInt()
   @IsPositive()
+  @IsOptional()
   userId: number;
 
   constructor(data?: Partial<UpdateTaskDto>) {
