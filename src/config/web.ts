@@ -31,12 +31,15 @@ export class WebConfiguration {
 
     app.use(
       cors({
-        origin: "*",
-        methods: "*",
-        allowedHeaders: "*",
+        origin: allowedOrigins,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
       }),
     );
+
+    // Asegúrate de manejar las preflight requests
+    app.options("*", cors());
   }
 
   private configureRequestLogger(app: Application) {
