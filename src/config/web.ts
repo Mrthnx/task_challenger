@@ -26,12 +26,13 @@ export class WebConfiguration {
   }
 
   private configureCors(app: Application) {
-    const allowedOrigins = ENV.NODE_ENV === "dev" ? "*" : /vercel\.app$/;
+    const allowedOrigins =
+      ENV.NODE_ENV === "dev" ? "*" : "https://task-challenge-front.vercel.app";
 
     app.use(
       cors({
         origin: allowedOrigins,
-        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         credentials: true,
       }),
     );
