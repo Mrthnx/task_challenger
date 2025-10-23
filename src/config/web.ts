@@ -26,6 +26,7 @@ export class WebConfiguration {
   }
 
   private configureCors(app: Application) {
+    app.set("trust proxy", 1);
     app.use(
       cors({
         origin: "*",
