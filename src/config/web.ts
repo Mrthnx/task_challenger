@@ -28,10 +28,13 @@ export class WebConfiguration {
   private configureCors(app: Application) {
     const allowedOrigins = ENV.NODE_ENV === "dev" ? "*" : /vercel\.app$/;
 
-    app.use(cors({
-      origin: allowedOrigins,
-      credentials: true
-    }));
+    app.use(
+      cors({
+        origin: allowedOrigins,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        credentials: true,
+      }),
+    );
   }
 
   private configureRequestLogger(app: Application) {
