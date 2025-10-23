@@ -31,8 +31,9 @@ export class WebConfiguration {
 
     app.use(
       cors({
-        origin: allowedOrigins,
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        origin: "*",
+        methods: "*",
+        allowedHeaders: "*",
         credentials: true,
       }),
     );
