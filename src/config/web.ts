@@ -30,7 +30,7 @@ export class WebConfiguration {
       cors({
         origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        allowedHeaders: "*",
         credentials: true,
       }),
     );
