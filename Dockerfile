@@ -17,6 +17,7 @@ COPY .env* ./
 RUN bun install
 
 # Compila la aplicación
+RUN bun pm trust --all
 RUN bun run build
 
 # Crea un usuario no-root para ejecutar la aplicación
