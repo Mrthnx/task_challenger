@@ -35,9 +35,6 @@ export class WebConfiguration {
         credentials: true,
       }),
     );
-
-    // Asegúrate de manejar las preflight requests
-    app.options("*", cors());
   }
 
   private configureRequestLogger(app: Application) {
