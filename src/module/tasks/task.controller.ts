@@ -24,7 +24,7 @@ export class TaskController extends BaseController<Task, unknown> {
     this.router.get("/:id", this.getByKey);
     this.router.post("/", [validationSchema(CreateTaskDto)], this.create);
     this.router.put("/:id", [validationSchema(UpdateTaskDto)], this.update);
-    this.router.patch("/:id", this.changeStatus);
+    this.router.put("/status/:id", this.changeStatus);
     this.router.delete("/:id", this.delete);
     return this.router;
   }
